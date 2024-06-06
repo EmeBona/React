@@ -24,7 +24,8 @@ function Login(onLogin) {
     }
 
 
-    function handleLoginClick (){
+    function handleLoginClick (event){
+        event.preventDefault()
         onLogin ({username, password, session})
     }
 
@@ -37,7 +38,7 @@ function Login(onLogin) {
         
     }   
   return (
-    <div>
+    <form onSubmit={handleLoginClick}>
         <h1>My Form</h1>
         <input name='username' value = {data.username} onChange = {handleInputChange} />
         <input name='password' type='password' value={data.password} onChange = {handleInputChange}/>
@@ -45,7 +46,7 @@ function Login(onLogin) {
         <button onClick= {handleLoginClick} disabled = {!data.username || !data.password}>Login</button>
         
         <button onClick={handleResetForm}>Reset</button>
-    </div>
+    </form>
   )
 }
 
