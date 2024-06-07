@@ -13,7 +13,6 @@ function GitHubUsers() {
     e.preventDefault();
     setUserList((currentList) => [...currentList, username]);
     // setUserList([...userList, username])
-    console.log(userList);
   }
 
   return (
