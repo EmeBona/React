@@ -19,7 +19,7 @@ function useCurrentLocation() {
 
   return {
     location: location,
-    setLocation: getLocation
+    getLocation: getLocation
   }
 }
 
