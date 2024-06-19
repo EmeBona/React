@@ -6,7 +6,7 @@ function Clock() {
 
     const [date, setDate] = useState(new Date())
 
-    const language = useContext(LanguageContext)
+    const {language} = useContext(LanguageContext)
 
     useEffect (() => {
 
@@ -19,7 +19,7 @@ function Clock() {
   return (
     <div>
         <h2>
-          {language === "en" ? "The hour is: " : "l'ora è"}{date.toLocaleTimeString()}
+          {language === "en" ? "The hour is: " : "l'ora è: "}{date.toLocaleTimeString()}
         </h2>
     </div>
   )

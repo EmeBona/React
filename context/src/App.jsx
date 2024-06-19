@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import './App.css'
 import Clock from './components/clock/Clock'
 
@@ -18,7 +18,7 @@ function handleSetLenguage (newLanguage){
       <button onClick={()=> handleSetLenguage("it")}>IT</button>
       <button onClick={()=> handleSetLenguage("en")}>EN</button>
       
-    <LanguageContext.Provider value = {language}>
+    <LanguageContext.Provider value = {{language, setLanguage}}>
     <Clock/>
     </LanguageContext.Provider>
     </div>
