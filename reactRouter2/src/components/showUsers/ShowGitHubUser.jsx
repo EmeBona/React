@@ -5,12 +5,23 @@ import { useParams } from "react-router-dom";
 function ShowGitHubUser() {
   const { username } = useParams();
   const [userData, setUserData] = useState({});
+  const [fetchError, setFetchError] = useState(null);
+  const [fetchLoading, setFetchLoading] = useState(false)
 
   const fetchData = async () => {
-    const data = await fetch(`https://api.github.com/users/${username}`);
-    const retrievedData = await data.json();
-
-    setUserData(retrievedData);
+    setFetchLoading(true);
+    try {
+      const response = await fetch(`https://api.github.com/users/${username}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setUserData(data);
+    } catch (error) {
+      setFetchError(error);
+    } finally {
+      setFetchLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -19,13 +30,14 @@ function ShowGitHubUser() {
 
   return (
     <div>
-      {userData ? (
+      {fetchLoading && <p>Loading...</p>}
+      {fetchError && <p>Error fetching user data: {fetchError.message}</p>}
+      {userData && (
         <div>
-          {" "}
           <img src={userData.avatar_url} alt="" />
-          <h1>{userData.login}</h1>{" "}
+          <h1>{userData.login}</h1>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

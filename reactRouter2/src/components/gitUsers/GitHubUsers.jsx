@@ -18,15 +18,19 @@ function GitHubUsers() {
 
   return (
     <div>
-      {fetchAnswer ? 
+    {fetchLoading && <p>Loading...</p>}
+    {fetchError && <p>Error fetching users: {fetchError.message}</p>}
+    {fetchAnswer && (
       <ul>
-        {fetchAnswer.map((user, index)=>{ 
-          return <li key={index}>
-          <Link to= {`/users/${user.login}`}>{user.login}</Link>
-          </li>})}
-      </ul> : null}
-      <Outlet/>
-    </div>    
+        {fetchAnswer.map((user, index) => (
+          <li key={index}>
+            <Link to={`/users/${user.login}`}>{user.login}</Link>
+          </li>
+        ))}
+      </ul>
+    )}
+    <Outlet />
+  </div>  
          
   )
 }
