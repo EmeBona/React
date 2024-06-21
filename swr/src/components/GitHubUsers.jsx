@@ -1,9 +1,9 @@
-import { useState } from "react";
-import GitHubUser from "./GitHubUser.jsx";
-import { Outlet } from "react-router-dom";
+import { useState } from 'react';
+import GitHubUser from './GitHubUser';
+import { Outlet } from 'react-router-dom';
 
 function GitHubUsers() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [userList, setUserList] = useState([]);
 
   function handleUsernameChange(e) {
@@ -13,7 +13,7 @@ function GitHubUsers() {
   function handleSubmit(e) {
     e.preventDefault();
     setUserList((currentList) => [...currentList, username]);
-    // setUserList([...userList, username])
+    setUsername(''); // Limpiar el campo de entrada después de agregar el usuario
   }
 
   return (
@@ -27,18 +27,17 @@ function GitHubUsers() {
         />
         <button>Submit</button>
       </form>
-       <ul>
-        {userList.map((item, index) => {
-          return (
-            <li key={index}>
-              <GitHubUser username={item} />
-            </li>
-          );
-        })}
+      <ul>
+        {userList.map((item, index) => (
+          <li key={index}>
+            <GitHubUser username={item} />
+          </li>
+        ))}
       </ul>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
 
 export default GitHubUsers;
+

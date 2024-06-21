@@ -1,24 +1,24 @@
-import useGitHubUser from "./useGithubUser";
-
+import useGithubUser from './useGithubUser';
 
 function GitHubUser({ username }) {
-  const { data, load, error } = useGitHubUser(username);
-
+  const { data, isLoading, error, refetch } = useGithubUser(username);
 
   return (
     <div>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{`${error.status} ${error.message}`}</p>}
       {data ? (
         <div>
           <h2>{data.name}</h2>
           <img src={data.avatar_url} alt="avatar" />
+          <button onClick={refetch}>Refetch User Data</button>
         </div>
       ) : (
         <p>No user</p>
       )}
-      {load && <p>Loading...</p>}
-      {error && <p>{`${error.status} ${error.message}`}</p>}
     </div>
   );
 }
 
 export default GitHubUser;
+
